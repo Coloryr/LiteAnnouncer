@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+version "1.0.0"
+
+// Version strings used for CI
+// Note the spaces before and after the equals sign
+ext.majorVersion = 1
+ext.minorVersion = 0
+ext.minecraftVersion = "1.8"
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name 'Spigot'
+        url 'https://hub.spigotmc.org/nexus/content/groups/public'
+    }
+    maven {
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+    maven {
+        name 'velocity'
+        url 'https://nexus.velocitypowered.com/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:3.0.0'
+//    dependencies { compile fileTree(dir:'libs',include:['*.jar'])}
+
+    annotationProcessor 'com.velocitypowered:velocity-api:3.0.0'
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
